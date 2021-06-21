@@ -1,0 +1,27 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "make:migration": "node node_modules/knex/bin/cli.js migrate:make --knexfile src/knexfile.js",
+    "migrate": "node node_modules/knex/bin/cli.js --knexfile src/knexfile.js migrate:latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuktibhatt/RestAPI_NODE.git"
+  },
+  "author": "Yukti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuktibhatt/RestAPI_NODE/issues"
+  },
+  "homepage": "https://github.com/yuktibhatt/RestAPI_NODE#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.95.6",
+    "pg": "^8.6.0"
+  }
+}
