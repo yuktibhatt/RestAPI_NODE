@@ -24,17 +24,17 @@ client.connect((err) => {
 
 app.listen(8000, () => console.log('Exress server up'));
 
-//get method 
+//get all users
 app.get('/users', (req,res) => {
-    client.query('SELECT * FROM users', (err, rows, fields) => {
+    client.query('SELECT * FROM users', (err, response) => {
         if(!err)
-        res.send(rows);
+        res.send(response.rows);
         else
         console.log(err);   
     })
 });
 
-//get an employee
+//get a user 
 app.get('/users/:id', (req,res) => {
     const id = req.params.id;
     client.query(`SELECT * FROM users WHERE userID = ${id}`, (err, response) => {
@@ -45,16 +45,18 @@ app.get('/users/:id', (req,res) => {
     })
 });
 
+//add a new user
+app.post('/users', (req,res) => {
+    const { userID, name, email} = req.body;
+    console.log(req.body);
+    client.query(`INSERT INTO users (userID, name, email) VALUES (${userID}, '${name}', '${email}') `, (err,response) => {
+        if(!err)
+        res.send("User added Succesfully");
+        else
+        console.log(err);   
 
-// app.post('/users/new', (req,res) => {
-//     const { userID, name, email} = request.body;
-//     client.query(`INSERT INTO users (userID, name, email) VALUES ${userID, name, email}`, (err,response) => {
-//         if (err) {
-//             throw err;
-//           }
-//           response.status(201).send(`User added with ID: ${result.insertId}`) 
-//     });
-// });
+    });
+});
 
 //delete a user
 app.delete('/users/:id', (req,res) => {
@@ -66,3 +68,18 @@ app.delete('/users/:id', (req,res) => {
         console.log(err);   
     })
 });
+
+//update a user
+app.put('/users/:id', (req,res) => {
+    const id = req.params.id;
+    
+    const { userID, name, email} = req.body;
+    console.log(req.body);
+    client.query(`UPDATE users SET name = '${name}', email='${email}' `, (err, response) => {
+        if(!err)
+        res.send("User Updated Succesfully");
+        else
+        console.log(err);   
+    })
+});
+
