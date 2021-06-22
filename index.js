@@ -46,3 +46,23 @@ app.get('/users/:id', (req,res) => {
 });
 
 
+// app.post('/users/new', (req,res) => {
+//     const { userID, name, email} = request.body;
+//     client.query(`INSERT INTO users (userID, name, email) VALUES ${userID, name, email}`, (err,response) => {
+//         if (err) {
+//             throw err;
+//           }
+//           response.status(201).send(`User added with ID: ${result.insertId}`) 
+//     });
+// });
+
+//delete a user
+app.delete('/users/:id', (req,res) => {
+    const id = req.params.id;
+    client.query(`DELETE FROM users WHERE userID = ${id}`, (err, response) => {
+        if(!err)
+        res.send("Deleted Succesfully");
+        else
+        console.log(err);   
+    })
+});
